@@ -2,17 +2,17 @@
 using namespace std;
 
 struct Student{
-    string fisrtName, lastName, department;
+    string firstName, lastName, department;
     int age, idNumber;
     char sex;
 
     void display(){
-        cout<<fisrtName<<" "<<lastName<<" "
-            <<" "<<age<<" "<<idNumber<<" "<<sex<<department<<endl;
+        cout<<firstName<<" "<<lastName<<" "
+            <<" "<<age<<" "<<idNumber<<" "<<sex<<" "<<department<<endl;
     }
 
     void setStudent(string fn, string ln, int a, int id, char s, string d){
-        fisrtName = fn;
+        firstName = fn;
         lastName = ln;
         age = a;
         idNumber = id;
@@ -21,7 +21,7 @@ struct Student{
     }
 
     void setFirstName(string fn){
-        fisrtName = fn;
+        firstName = fn;
     }
 
     void setLastName(string ln){
@@ -45,7 +45,7 @@ struct Student{
     }
 
     string getFirstName() {
-        return fisrtName;
+        return firstName;
     }
     string getLastName() {
         return lastName;
