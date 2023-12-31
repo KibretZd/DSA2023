@@ -8,3 +8,4 @@ int lin_search(int arr[], int n, int sKey){
 }
 
 //write an iterative implementation of binary search fiunction
+
