@@ -1,13 +1,7 @@
 #include<iostream>
 #include"sort.h"
 using namespace std;
-
-void printArray(int c[], int n){
-    for(int i = 0; i < n; i++){
-        cout << c[i] << " ";
-    }
-    cout << endl;
-}
+ 
 
 int main()
 {
@@ -17,7 +11,13 @@ int main()
     printArray(arr, n);
 
     //Call bubble sort to arrange array elements here
-    bubbleSort(arr, n);
+    // bubbleSort(arr, n);
+
+    // call selection sort function
+    // selectionSort(arr, n);
+
+    // write a statement to call insertion sort function here
+    your code here
 
     cout<<"\nThe array elements after sorting:";
     printArray(arr, n);
