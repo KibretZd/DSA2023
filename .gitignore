@@ -1,7 +1,4 @@
+.vscode
 ./Project1/testStudent
 ./Lab01-search/main
 ./Lab02-sorting/main
-.vscode
-*
-!/**/
-!*.*
