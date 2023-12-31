@@ -53,7 +53,7 @@ int main()
     //Print students
     cout<<"FirstName  LastName   Age IDNo.  sex Department"<<endl;
     for(int j = 0; j< 3;j++){ 
-        st[j].display();
+        st[j].printStudent();
     }
 
     return 0;

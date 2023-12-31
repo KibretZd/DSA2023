@@ -1,17 +1,20 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-struct Student{
+struct Student
+{
     string firstName, lastName, department;
     int age, idNumber;
     char sex;
 
-    void display(){
-        cout<<firstName<<" "<<lastName<<" "
-            <<" "<<age<<" "<<idNumber<<" "<<sex<<" "<<department<<endl;
+    void printStudent() const
+    {
+        cout << firstName << " " << lastName << " "
+             << " " << age << " " << idNumber << " " << sex << " " << department << endl;
     }
 
-    void setStudent(string fn, string ln, int a, int id, char s, string d){
+    void setStudent(string fn, string ln, int a, int id, char s, string d)
+    {
         firstName = fn;
         lastName = ln;
         age = a;
@@ -20,47 +23,59 @@ struct Student{
         department = d;
     }
 
-    void setFirstName(string fn){
+    void setFirstName(string fn)
+    {
         firstName = fn;
     }
 
-    void setLastName(string ln){
+    void setLastName(string ln)
+    {
         lastName = ln;
     }
 
-    void setAgae(int a){
+    void setAgae(int a)
+    {
         age = a;
     }
 
-    void setIdNumber(int id){
+    void setIdNumber(int id)
+    {
         idNumber = id;
     }
 
-    void setSex(char s){
+    void setSex(char s)
+    {
         sex = s;
     }
 
-    void setDepartment(string d){
+    void setDepartment(string d)
+    {
         department = d;
     }
 
-    string getFirstName() {
+    string getFirstName() const
+    {
         return firstName;
     }
-    string getLastName() {
+    string getLastName() const
+    {
         return lastName;
     }
-    string getDepartment() {
+    string getDepartment() const
+    {
         return department;
     }
-    int getAge() {
+    int getAge() const
+    {
         return age;
     }
-    int getIdNumber() {
+    int getIdNumber() const
+    {
         return idNumber;
     }
 
-    char getSex() {
+    char getSex() const
+    {
         return sex;
     }
 };
