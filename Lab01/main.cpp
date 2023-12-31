@@ -14,7 +14,11 @@ int main() {
     cout<<"\nEnter an item to search: ";
     cin>>searchItem;
 
-    int location = lin_search(arr, n, searchItem);
+    // int location = lin_search(arr, n, searchItem);
+
+    // int location = binary_search(arr, n, searchItem);//Iterative implementation
+    int location = bin_search(arr, 0, n-1, searchItem);//recursive implementation
+
     if(location == -1){
         cout<<searchItem<<" is not found!"<<endl;
     }
