@@ -1,4 +1,4 @@
-# Project 1 - Student Management system using Arrays
+# Project 1 - Student Information Management system using Arrays
 This student management system has the following functions:
 1. Registers a new student to the student list
 2. Removes a student from the list using the ID of a student
