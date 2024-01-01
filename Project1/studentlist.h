@@ -22,10 +22,10 @@ public:
     void removeStudentByIdNumber(int id);
     void printStudents() const;
     int getCount() const;
-    int searchByIdNumber(int id);
-    void searchByFirstName(string firstName);
-    void searchByLastName(string lastName);
-    void searchByDepartment(string department);
+    int searchByIdNumber(int id) const;
+    void searchByFirstName(string firstName)const;
+    void searchByLastName(string lastName)const;
+    void searchByDepartment(string department)const;
     void femaleStudents() const;
     void maleStudents() const;
 
@@ -119,7 +119,7 @@ int StudentList::getCount() const
 }
 
 // This following function will search for a student by id number
-int StudentList::searchByIdNumber(int id)
+int StudentList::searchByIdNumber(int id) const
 {
     // Here I have used linear search implementation
     for (int i = 0; i < count; i++)
@@ -134,7 +134,7 @@ int StudentList::searchByIdNumber(int id)
 }
 
 // This following function will print all students whose first name is given
-void StudentList::searchByFirstName(string firstName)
+void StudentList::searchByFirstName(string firstName)const
 {
     // search all student by their firstname that matches the given firstname
     bool ifFound = false;
@@ -153,12 +153,12 @@ void StudentList::searchByFirstName(string firstName)
 }
 
 // This following function will print all students whose last name is given
-void StudentList::searchByLastName(string lastName)
+void StudentList::searchByLastName(string lastName)const
 {
 
     // Write your code here to search all student by their lastname that matches the given lastname
 }
-void StudentList::searchByDepartment(string department)
+void StudentList::searchByDepartment(string department)const
 {
 
     // Write your code here to search all student by their department that matches the given department
