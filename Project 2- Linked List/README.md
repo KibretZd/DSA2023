@@ -1,4 +1,7 @@
 # Project 2 - Linked List implementation of Student Information Management 
+
+This project is implemented using signle linked list.
+
 ## Instruction
 
 * This project is a group assignment of maximum 5 students per each group.
