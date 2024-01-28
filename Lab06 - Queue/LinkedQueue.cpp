@@ -9,13 +9,13 @@ struct QNode
     QNode *link;
 };
 
-class QueueArray
+class LinkedQueue
 {
     QNode *front; // To store the address of front node
     QNode *rear;  // To store the address of last node
     int size;     // To count the number of elements in the queue
 public:
-    QueueArray()
+    LinkedQueue()
     {
         front = rear = NULL;
         size = 0;
@@ -27,7 +27,7 @@ public:
     void getFront() const; // Return the front element
 };
 
-int QueueArray ::isEmpty() const
+int LinkedQueue ::isEmpty() const
 {
     if (size == 0)
     {
@@ -39,11 +39,11 @@ int QueueArray ::isEmpty() const
     }
 }
 
-int QueueArray::length() const
+int LinkedQueue::length() const
 {
     return size;
 } // Returns the number of elements in the queue
-void QueueArray::enqueue(int data)
+void LinkedQueue::enqueue(int data)
 {
     QNode *insNode = new QNode;
     insNode->data = data;
@@ -62,14 +62,14 @@ void QueueArray::enqueue(int data)
     size++;
     cout << data << " is enqueued Successfully" << endl;
 }
-void QueueArray::dequeue()
+void LinkedQueue::dequeue()
 {
     if (!isEmpty())
     {
         QNode *temp = front;
-        
+
         front = front->link;
-        if(front == NULL)
+        if (front == NULL)
         {
             rear = NULL;
         }
@@ -81,12 +81,12 @@ void QueueArray::dequeue()
         cout << "Queue is empty!" << endl;
     // return -1;
 }
-void QueueArray::getFront() const
+void LinkedQueue::getFront() const
 {
     if (!isEmpty())
     {
-        
-        cout << "The front element is: " << front->data<< endl;
+
+        cout << "The front element is: " << front->data << endl;
     }
     else
     {
@@ -97,26 +97,26 @@ void QueueArray::getFront() const
 int main()
 {
 
-    QueueArray q;
-    q.enqueue(30); //30 is enqueued successfully
-    q.enqueue(40);  //40 is enqueued successfully
+    LinkedQueue q;
+    q.enqueue(30); // 30 is enqueued successfully
+    q.enqueue(40); // 40 is enqueued successfully
     q.enqueue(10);
     q.enqueue(20);
     q.enqueue(50);
-    q.enqueue(75);   //75 is enqueued successfully
-cout<<"The size of the queue is "<<q.length()<<endl;
+    q.enqueue(75); // 75 is enqueued successfully
+    cout << "The size of the queue is " << q.length() << endl;
     q.getFront(); // 30
     q.getFront(); // 30
     q.dequeue();  // 30
     q.getFront(); // 40
     q.dequeue();  // 40
-    cout<<"The size of the queue is "<<q.length()<<endl;
-    q.dequeue();  // 10
-    q.dequeue();  // 20
-    q.dequeue();  // 50
-    q.dequeue();  // 75 is dequeued successfully    
-    q.dequeue();  // queue is empty()
-    cout<<"The size of the queue is "<<q.length()<<endl;
+    cout << "The size of the queue is " << q.length() << endl;
+    q.dequeue(); // 10
+    q.dequeue(); // 20
+    q.dequeue(); // 50
+    q.dequeue(); // 75 is dequeued successfully
+    q.dequeue(); // queue is empty()
+    cout << "The size of the queue is " << q.length() << endl;
 
     return 0;
 }
