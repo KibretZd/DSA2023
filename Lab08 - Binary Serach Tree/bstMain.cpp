@@ -19,15 +19,15 @@ void displayMenu()
 }
 int main()
 {
-    char ch;
+    char choice;
     int item;
     BinarySearchTree T;
     do
     {
         displayMenu();
-        cin >> ch;
+        cin >> choice;
         cout << endl;
-        switch (ch)
+        switch (choice)
         {
         case '1':
             cout << "Enter the item you want to add: ";
@@ -99,7 +99,7 @@ int main()
             cout << "You have entered invalid choice! Try again." << endl;
             break;
         }
-    } while (ch != '9');
+    } while (choice != '9');
 
     return 0;
 }
