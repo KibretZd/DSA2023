@@ -114,13 +114,14 @@ void List ::remove(int data)
 {
     if (!isEmpty())
     {
+        // Traverse to find the node to be deleted
         Node *curNode = head;
         Node *prev = NULL;
 
         while (curNode && curNode->data != data)
         {
             prev = curNode;
-            curNode = curNode->link; // Traverse to find the node to be deleted
+            curNode = curNode->link; 
         }
         if (curNode)
         {
