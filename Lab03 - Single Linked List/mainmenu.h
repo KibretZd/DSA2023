@@ -6,66 +6,73 @@ void displayMenu()
     do
     {
 
-        cout << "\n\n\t\tLinked List Menu" << endl;
+        cout << "\n\n\t\t Linked List Menu" << endl;
         cout << "1. Add an element to the list" << endl;
-        cout << "2. Remove an element from the list" << endl;
+        cout << "2. Delete an element from the list" << endl;
         cout << "3. Traverse the list" << endl;
-        cout << "4. Update an element in the list" << endl;
-        cout << "5. Search an element in the list" << endl;
-        cout << "6. Find the length of the list" << endl;
+        cout << "4. Search an element from the list" << endl;
+        cout << "5. Find the length of the list" << endl;
+        cout << "6. Make the list empty" << endl;
         cout << "7. Exit" << endl;
-        cout << "Enter your choice:" << endl;
+        cout << "Enter your choice:  " << endl;
         cin >> choice;
         switch (choice)
         {
         case '1':
-            cout << "\nEnter  number to be inserted:";
+            cout << "\nEnter a number to be inserted:";
             cin >> num;
             cout << "\nEnter position:";
             cin >> position;
-            list1.add(num, position);
+            list1.insert(num, position);
             break;
 
         case '2':
-            cout << "\nEnter  number to be removed:";
+            cout << "\nEnter the element to be deleted: ";
             cin >> num;
             list1.remove(num);
             cout << endl;
             break;
 
         case '3':
-            cout << "\nTraversing the list:";
-            list1.traverse();
+            if (list1.isEmpty())
+            {
+                cout << "\nThe list is empty!" << endl;
+            }
+            else
+            {
+                cout << "\nTraversing the list: ";
+                list1.traverse();
+            }
             break;
 
         case '4':
-            int old_data, new_Data;
-            cout << "\nEnter  number to be updated:";
-            cin >> old_data;
-            cout << "\nEnter new number:";
-            cin >> new_Data;
-            list1.update(old_data, new_Data);
-            cout << endl;
-            break;
-
-        case '5':
-            cout << "\nEnter number to be searched:";
+            cout << "\nEnter an element search: ";
             cin >> num;
             if (list1.search(num))
             {
                 cout << "\n"
-                     << num << " Found" << endl;
-                ;
+                     << num << " is found." << endl;
             }
             else
             {
                 cout << "\n"
-                     << num << " Found" << endl;
+                     << num << " is not found!" << endl;
             }
             break;
-        case '6':
+        case '5':
             cout << "\nThe length of the list: "
                  << list1.length() << endl;
+            break;
+
+        case '6':
+            char confirm;
+            cout << "Are you you want to destroy the list? [Y|N]: ";
+            cin >> confirm;
+            if (confirm == 'y' || confirm == 'Y')
+            {
+                list1.destroy();
+                cout << "\nAll the elements of the list are deleted. The list is now empty." << endl;
+            }
             break;
 
         case '7':

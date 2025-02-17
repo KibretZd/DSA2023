@@ -1,34 +1,34 @@
-// Class implementation of single linked list
+// Demonstration a single linked list with each node storing a single integer
 
+// Definition of a node
 struct Node
 {
     int data;
     Node *link;
 };
 
+// Class implementation of single linked list
 class List
 {
 private:
-    Node *head, *tail;
+    Node *head;
     int count;
 
 public:
-    List();
-    ~List();
-    bool isEmpty() const;
-    void add(int data, int position);
+    List();               // Constructor to initialize data members
+    ~List();              // Destructor to delete all the node created dynamically
+    bool isEmpty() const; // Checks whether the list is empty or not
+    void insert(int data, int position);
     void traverse() const;
     void remove(int data);
     void destroy();
     bool search(int data);
     int length();
-    void update(int data, int newdata);
 };
-
 
 List::List()
 {
-    head = tail = NULL;
+    head = NULL;
     count = 0;
 }
 
@@ -37,107 +37,102 @@ List::~List()
     destroy();
 }
 
-
 bool List::isEmpty() const
 {
-    return head != NULL;
+    return head == NULL;
 }
-
 
 void List::destroy()
 {
-    Node *curr;
+    Node *temp;
     while (head != NULL)
     {
-        curr = head;
+        temp = head;
         head = head->link;
-        delete curr;
+        delete temp;
     }
-    tail = NULL;
     count = 0;
 }
 
-void List ::add(int data, int position)
+void List ::insert(int data, int position)
 {
     Node *newNode = new Node;
     newNode->data = data;
     newNode->link = NULL;
 
-    if (head == NULL)
+    if (position == 0)
     {
-        head = tail = newNode;
+        newNode->link = head;
+        head = newNode;
+        cout << data << " is inserted successfully." << endl;
         count++;
     }
     else
     {
-        int count = 1;
-        Node *curr = head;
-        while (curr && count < position - 1)
+        int countNode = 1;
+        Node *curNode = head;
+        while (curNode && countNode < position)
         {
-            curr = curr->link;
-            count++;
+            curNode = curNode->link;
+            countNode++;
         }
-        if (curr)
+        if (curNode)
         {
-            newNode->link = curr->link;
-            curr->link = newNode;
+            newNode->link = curNode->link;
+            curNode->link = newNode;
+            cout << data << " is inserted successfully." << endl;
+            count++;
         }
         else
         {
-            // position is greater than the number of nodes, insert at the end of the list
-            tail->link = newNode;
-            tail = newNode;
+            cout << data << " is NOT inserted! Position " << position << " is too large!" << endl;
+            delete newNode;
         }
-        count++;
     }
-    cout<<"Added: "<<data<<endl;
 }
 
 void List ::traverse() const
 {
-    Node *curr = head;
+    Node *curNode = head;
     cout << endl;
-    while (curr)
+    while (curNode)
     {
-        cout << curr->data << " ";
-        curr = curr->link;
+        cout << curNode->data << " ";
+        curNode = curNode->link;
     }
     cout << endl;
 }
-
 
 void List ::remove(int data)
 {
 
     if (!isEmpty())
     {
-        Node *curr = head;
+        Node *curNode = head;
         Node *prev = NULL;
-        if (curr->data == data)
+
+        while (curNode && curNode->data != data)
         {
-            head = curr->link;
-            cout << "Deleted: " << curr->data << endl;
-            delete curr;
+            prev = curNode;
+            curNode = curNode->link;
+        }
+        if (curNode)
+        {
+            if (head == curNode)
+            {
+                head = head->link;
+            }
+            else
+            {
+                prev->link = curNode->link;
+            }
+            cout << curNode->data << " is deleted." << endl;
+            delete curNode;
             count--;
         }
         else
         {
-            while (curr && curr->data != data)
-            {
-                prev = curr;
-                curr = curr->link;
-            }
-            if (curr)
-            {
-                prev->link = curr->link;
-                cout << "Deleted: " << curr->data << endl;
-                delete curr;
-                count--;
-            }
-            else
-            {
-                cout << "Element not found" << endl;
-            }
+            cout << data << " is not found!" << endl;
         }
     }
     else
@@ -146,42 +141,19 @@ void List ::remove(int data)
     }
 }
 
-
 bool List ::search(int data)
 {
-    Node *curr = head;
-    while (curr)
+    Node *curNode = head;
+    while (curNode)
     {
-        if (curr->data == data)
+        if (curNode->data == data)
             return true;
-        curr = curr->link;
+        curNode = curNode->link;
     }
     return false;
 }
 
-
 int List ::length()
 {
     return count;
-}
-
-/*
- * This code defines a method called update in the List class.
- *It takes two int parameters, data and newdata.
- * It iterates through the linked list until it finds a node with data equal to the given value.
- * If found, it updates the data of that node with the newdata value.
- */
-void List ::update(int data, int newdata)
-{
-    Node *curr = head;
-    while (curr)
-    {
-        if (curr->data == data)
-        {
-            curr->data = newdata;
-            cout<<"Updated: "<<curr->data<<endl;
-            break;
-        }
-        curr = curr->link;
-    }
 }

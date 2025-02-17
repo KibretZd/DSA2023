@@ -27,8 +27,7 @@ public:
 // Define the member functions here
 DoubleLinkedList ::DoubleLinkedList()
 {
-    head = NULL;
-    tail = NULL;
+    head = tail = NULL;
     count = 0;
 }
 
@@ -57,7 +56,9 @@ void DoubleLinkedList ::traverse() const
             cout << temp->data << " ";
             temp = temp->prev;
         }
-    }else{
+    }
+    else
+    {
         cout << "List is empty!" << endl;
     }
     cout << endl;
@@ -89,97 +90,100 @@ void DoubleLinkedList ::add(int value, int position)
         return;
     }
 
-    Node *insNode = new Node;
-    insNode->data = value;
+    Node *NewNode = new Node;
+    NewNode->data = value;
 
     if (position == 0)
     {
-        insNode->next = head;
-        insNode->prev = NULL;
+        NewNode->next = head;
+        NewNode->prev = NULL;
         if (head) // head!=NULL
-            head->prev = insNode;
+            head->prev = NewNode;
         else // If list is empty
-            tail = insNode;
-        head = insNode;
-        count++;
+            tail = NewNode;
+        head = NewNode;
     }
     else
     {
         // Locate the node after which the newNode to be inserted
-        Node *temp = head;
-        int i = 1;
-        while (temp != NULL && i < position)
+        Node *curNode = head;
+        int countNode = 1;
+        while (curNode != NULL && countNode < position)
         {
-            temp = temp->next;
-            i++;
+            curNode = curNode->next;
+            countNode = countNode + 1;
         }
-        if (temp)
+        if (curNode)
         {
-            insNode->prev = temp;
-            insNode->next = temp->next;
-            if (temp->next)
-                temp->next->prev = insNode;
+            NewNode->prev = curNode;
+            NewNode->next = curNode->next;
+            if (curNode->next)
+                curNode->next->prev = NewNode;
             else
-                tail = insNode;
-            temp->next = insNode;
+                tail = NewNode;
+            curNode->next = NewNode;
         }
         else
         {
             // cout<<"Invalid position"<<endl;
-            // delete insNode;
-
-            insNode->next = NULL;
-            insNode->prev = tail;
-            tail->next = insNode;
-            tail = insNode;
+            // Lets insert newNode at the end of the list for position greater than the length of the list
+            NewNode->next = NULL;
+            NewNode->prev = tail;
+            tail->next = NewNode;
+            tail = NewNode;
         }
-        count++;
     }
+    count++;
 }
 
-void DoubleLinkedList :: remove(int value){
+void DoubleLinkedList ::remove(int data)
+{
 
     if (isEmpty())
     {
         cout << "List is empty!" << endl;
         return;
     }
-    Node *delNode = head;
-    if(head->data == value)
+
+    Node *deleteNode = head;
+    while (deleteNode && deleteNode->data != data)
+        deleteNode = deleteNode->next;
+    if (deleteNode != NULL)
     {
-        if(head->next){ //If the list has more than node
+        if (deleteNode == head)
+        {
             head = head->next;
-            head->prev = NULL;
+            if (head)
+            {
+                // If the list has more than node
+                head->prev = NULL;
+            }
+            else
+            { // If list has only one node
+                tail = NULL;
+            }
         }
-        else{ //If list has only one node
-            head = NULL;
-            tail = NULL;
+        else
+        {
+            deleteNode->prev->next = deleteNode->next;
+            if (deleteNode->next)
+            {
+                // Delete middle node
+                deleteNode->next->prev = deleteNode->prev;
+            }
+            else
+            {
+                // Delete last node
+                tail = deleteNode->prev;
+            }
         }
-        cout<<"Value "<<value<<" deleted successfully!"<<endl;
-        delete delNode;
+        cout << "Element " << data << " is deleted successfully!" << endl;
+        delete deleteNode;
         count--;
-    } else{
-        Node *temp = head;
-        while(temp && temp->data != value)
-            temp = temp->next;
-        if(temp != NULL){
-            if(temp->next){
-                //Delete middle node
-                temp->prev->next = temp->next;
-                temp->next->prev = temp->prev;
-            }
-            else{
-                //Delete last node
-                temp->prev->next = NULL;
-                tail = temp->prev;
-            }
-            cout<<"Value "<<value<<" deleted successfully!"<<endl;
-            delete temp;
-            count--;
-        }
-        else{
-            cout<<"Value "<<value<<" not found!"<<endl;
-        }
+    }
+    else
+    {
+        cout << "Element " << data << " is not found!" << endl;
     }
 }
 
