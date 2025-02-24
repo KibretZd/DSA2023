@@ -1,5 +1,5 @@
 // Program for stack implementation using arrays.
-
+#include <stdexcept>
 class Stack
 {
 private:
@@ -37,8 +37,7 @@ void Stack::push(int data)
 {
     if (isFull())
     {
-        cout << "Stack Overflow!" << endl;
-        return;
+        throw overflow_error("Stack Overflow!");
     }
 
     //Otherwise if stack is not full, then do the following operations
@@ -48,8 +47,7 @@ void Stack::push(int data)
 int Stack::pop() {
     if (isEmpty())
     {
-        cout << "Stack Underflow!" << endl;
-        return -1;
+        throw underflow_error("Stack Underflow!");
     }
 
     // int poppedElement = stack[top];
@@ -62,8 +60,7 @@ int Stack::getTop() const
 {
     if (isEmpty())
     {
-        cout << "Stack is empty!" << endl;
-        return -1;
+        throw underflow_error("Stack is empty!");
     }
 
     //Otherwise if stack is not empty

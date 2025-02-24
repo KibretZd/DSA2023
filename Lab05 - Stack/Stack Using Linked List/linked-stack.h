@@ -1,4 +1,5 @@
 // Linked list implementation of stack data structure
+#include <stdexcept>
 
 struct Node
 {
@@ -46,7 +47,7 @@ void Stack ::destroy()
 
 int Stack ::isEmpty() const
 {
-    return top == NULL;
+    return (top == NULL);
 }
 void Stack ::push(int item)
 {
@@ -60,8 +61,7 @@ int Stack ::pop()
 {
     if (isEmpty())
     {
-        cout << "Stack underflow!" << endl;
-        return -1;
+        throw underflow_error("Stack underflow!");
     }
     Node *temp = top;
     int deletedItem = top->data;
@@ -78,8 +78,7 @@ int Stack ::getTop() const
     }
     else
     {
-        cout << "Stack is empty!" << endl;
-        return -1;
+        throw underflow_error( "Stack is empty!") ;
     }
 }
 int Stack ::length() const
