@@ -1,5 +1,5 @@
 
-// Array implementation of circular array
+// Array implementation of circular queue
 #include <iostream>
 using namespace std;
 
@@ -27,30 +27,19 @@ public:
 
 int QueueArray ::isEmpty() const
 {
-    if (size == 0)
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
+    return (size == 0);
 }
+
 int QueueArray::isFull() const
 {
-    if (size == MAX_SIZE)
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
+    return (size == MAX_SIZE);
 }
+
+// Returns the number of elements in the queue
 int QueueArray::length() const
 {
     return size;
-} // Returns the number of elements in the queue
+}
 void QueueArray::enqueue(int data)
 {
     if (!isFull())
@@ -62,33 +51,31 @@ void QueueArray::enqueue(int data)
     }
     else
     {
-        cout << "Queue is full!" << endl;
+        throw overflow_error("Queue is full!");
     }
 }
-void QueueArray::dequeue()
+int QueueArray::dequeue()
 {
     if (!isEmpty())
     {
         front = (front + 1) % MAX_SIZE;
         size--;
-        // return queue[front];
-        cout << queue[front] << " Dequeued Successfully" << endl;
+        return queue[front];
     }
     else
-        cout << "Queue is empty!" << endl;
-    // return -1;
+        throw underflow_error("Queue is empty!");
 }
-void QueueArray::getFront() const
+
+int QueueArray::getFront() const
 {
     if (!isEmpty())
     {
         int temp = (front + 1) % MAX_SIZE;
-        // return queue[temp];
-        cout << "The front element is: " << queue[temp] << endl;
+        return queue[temp];
     }
     else
     {
-        cout << "The queue is empty!" << endl;
+        throw underflow_error("Queue is empty!");
     }
 }
 
@@ -101,7 +88,7 @@ int main()
     q.enqueue(10);
     q.enqueue(20);
     q.enqueue(50);
-     q.enqueue(75);
+    q.enqueue(75);
 
     q.getFront(); // 30
     q.getFront(); // 30

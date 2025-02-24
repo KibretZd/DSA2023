@@ -1,5 +1,5 @@
 
-// Array implementation of circular array
+// Queue implementation using linked list
 #include <iostream>
 using namespace std;
 
@@ -12,7 +12,7 @@ struct QNode
 class LinkedQueue
 {
     QNode *front; // To store the address of front node
-    QNode *rear;  // To store the address of last node
+    QNode *rear;  // To store the address of last node from the rear end
     int size;     // To count the number of elements in the queue
 public:
     LinkedQueue()
@@ -20,29 +20,26 @@ public:
         front = rear = NULL;
         size = 0;
     }
-    int isEmpty() const;
-    int length() const; // Returns the number of elements in the queue
-    void enqueue(int data);
-    void dequeue();
-    void getFront() const; // Return the front element
+    int isEmpty() const;    // Checks whether the queue is empty or not
+    int length() const;     // Returns the number of elements in the queue
+    void enqueue(int data); // Add an elelment into the queue
+    int dequeue();          // Deletes the front element from the queue
+    int getFront() const;   // Return the front element
 };
 
+// Checks whether the queue is empty or not
 int LinkedQueue ::isEmpty() const
 {
-    if (size == 0)
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
+    return (front == NULL);
 }
 
+// Returns the number of elements in the queue
 int LinkedQueue::length() const
 {
     return size;
-} // Returns the number of elements in the queue
+}
+
+// Enqueue : Adds new item in to the queue
 void LinkedQueue::enqueue(int data)
 {
     QNode *insNode = new QNode;
@@ -50,47 +47,44 @@ void LinkedQueue::enqueue(int data)
     insNode->link = NULL;
 
     if (isEmpty())
-    {
-        front = rear = insNode;
-    }
+        front = insNode;
     else
-    {
         rear->link = insNode;
-        rear = insNode;
-    }
 
+    rear = insNode;
     size++;
-    cout << data << " is enqueued Successfully" << endl;
+    cout << data << " is enqueued Successfully." << endl;
 }
-void LinkedQueue::dequeue()
+
+int LinkedQueue::dequeue()
 {
     if (!isEmpty())
     {
         QNode *temp = front;
-
+        int data = front->data;
         front = front->link;
         if (front == NULL)
         {
             rear = NULL;
         }
         size--;
-        cout << temp->data << " is dequeued Successfully" << endl;
+        cout << temp->data << " is dequeued Successfully." << endl;
         delete temp;
+        return data;
     }
     else
-        cout << "Queue is empty!" << endl;
-    // return -1;
+        throw underflow_error("Queue is empty!");
 }
-void LinkedQueue::getFront() const
-{
-    if (!isEmpty())
-    {
 
-        cout << "The front element is: " << front->data << endl;
+int LinkedQueue::getFront() const
+{
+    if (isEmpty())
+    {
+        throw underflow_error("The queue is empty!");
     }
     else
     {
-        cout << "The queue is empty!" << endl;
+        return front->data;
     }
 }
 
