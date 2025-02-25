@@ -4,84 +4,96 @@
 struct Node
 {
     int data;
-    Node *next;
+    Node *link;
 };
 
-class Stack
+class LinkedStack
 {
 private:
-    Node *top;
-    int count;
+    Node *top; // Pointer to the top of the stack
+    int count; // Number of items in the stack
 
 public:
-    Stack();
-    ~Stack();
-    int isEmpty() const;
-    void push(int item);
-    int pop();
-    int getTop() const;
-    int length() const; // Returns the number of items/nodes in stack
-    void destroy();
+    LinkedStack();         // Constructor
+    ~LinkedStack();        // Destructor
+    int isEmpty() const;   // Check if the stack is empty
+    void push(int item);   // Push an item onto the stack
+    int pop();             // Pop an item from the stack
+    int getTop() const;    // Get the top item from the stack
+    int length() const;    // Returns the number of items/nodes in stack
+    void destroy();        // Deletes all nodes from the stack
+    void traverse() const; // Traverse and print the stack
 };
 
-Stack ::Stack()
+LinkedStack ::LinkedStack()
 {
-    top = NULL;
-    count = 0;
+    top = NULL; // Initialize top to NULL
+    count = 0;  // Initialize count to 0
 }
-Stack ::~Stack()
+LinkedStack ::~LinkedStack()
 {
-    destroy();
+    destroy(); // Call destroy to clean up the stack
 }
 
-void Stack ::destroy()
+void LinkedStack ::destroy()
 {
-    Node *temp;
+    Node *temp; // Temporary pointer to node
     while (top != NULL)
     {
-        temp = top;
-        top = top->next;
-        delete temp;
+        temp = top;      // Store the address of top in temp
+        top = top->link; // Move top to the next node
+        delete temp;     // Delete the node
     }
 }
 
-int Stack ::isEmpty() const
+int LinkedStack ::isEmpty() const
 {
-    return (top == NULL);
+    return (top == NULL); // Return true if top is NULL, indicating the stack is empty
 }
-void Stack ::push(int item)
+void LinkedStack ::push(int item)
 {
-    Node *temp = new Node;
-    temp->data = item;
-    temp->next = top;
-    top = temp;
-    count++;
+    Node *temp = new Node; // Create a new node
+    temp->data = item;     // Assign the item to the data field of the node
+    temp->link = top;      // Link the new node to the top node
+    top = temp;            // Move top to the new node
+    count += 1;            // Increment the count
 }
-int Stack ::pop()
+int LinkedStack ::pop()
 {
-    if (isEmpty())
+    if (isEmpty())              // Check if the stack is empty
     {
-        throw underflow_error("Stack underflow!");
+        throw underflow_error("Stack underflow!");  //Throw an exception if the stack is empty
     }
-    Node *temp = top;
-    int deletedItem = top->data;
-    top = top->next;
-    delete temp;
-    count--;
-    return deletedItem;
+    Node *temp = top;               // Store the address of top in temp
+    int deletedItem = top->data;    // Store the data of top in deletedItem
+    top = top->link;                // Move top to the next node
+    delete temp;                    // Delete the node
+    count--;                        // Decrement the count
+    return deletedItem;             // Return the deleted item
 }
-int Stack ::getTop() const
+int LinkedStack ::getTop() const
 {
     if (!isEmpty())
     {
-        return top->data;
+        return top->data;       // Return the data of the top node
     }
     else
     {
-        throw underflow_error( "Stack is empty!") ;
+        throw underflow_error("Stack is empty!"); // Throw an exception if the stack is empty
     }
 }
-int Stack ::length() const
+int LinkedStack ::length() const
 {
-    return count;
+    return count;       // Return the count
+}
+
+void LinkedStack ::traverse() const
+{
+    Node *temp = top;                   // Create a temporary pointer to node and initialize it with top
+    while (temp != NULL)                // Traverse the stack
+    {
+        cout << temp->data << " ";      // Print the data of the node
+        temp = temp->link;              // Move to the next node
+    }
+    cout << endl;                   // Print a new line
 }

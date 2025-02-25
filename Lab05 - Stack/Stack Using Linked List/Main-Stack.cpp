@@ -7,7 +7,7 @@ using namespace std;
 #include "linked-stack.h"
 
 int main(){
-    Stack stack;
+    LinkedStack stack;
     stack.push(95);
     stack.push(25);    
     stack.push(55);
