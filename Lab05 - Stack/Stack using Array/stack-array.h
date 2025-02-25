@@ -1,6 +1,6 @@
 // Program for stack implementation using arrays.
 #include <stdexcept>
-class Stack
+class StackArray
 {
 private:
     int MAXSIZE;
@@ -8,7 +8,7 @@ private:
     int stack[100];
 
 public:
-    Stack()
+    StackArray() //Constructor
     {
         top = -1;
         MAXSIZE = 100;
@@ -16,47 +16,42 @@ public:
 
     int isEmpty() const
     {
-        return top == -1;
+        return (top == -1);
     }
 
     int isFull() const
     {
-        return top == MAXSIZE - 1;
+        return (top == MAXSIZE - 1); //If top is equal to MAXSIZE - 1, then stack is full
     }
     void push(int data); // Inserts 'data' in the stack
     int pop();           // Removes the topmost element from the stack
     int getTop() const;  // Returns the topmost element from the stack
     void destroy();      // Deletes all elements from the stack
-
+    void traverse() const; //Traverse the stack
     int length() const{
-        return top + 1;
+        return (top + 1);
     }
 };
 
-void Stack::push(int data)
+void StackArray::push(int data)
 {
     if (isFull())
     {
-        throw overflow_error("Stack Overflow!");
+        throw overflow_error("Stack is Overflow!");
     }
 
     //Otherwise if stack is not full, then do the following operations
-    top++;
-    stack[top] = data;
+    stack[++top] = data;
 }
-int Stack::pop() {
+int StackArray::pop() {
     if (isEmpty())
     {
-        throw underflow_error("Stack Underflow!");
+        throw underflow_error("Stack is Underflow!");
     }
-
-    // int poppedElement = stack[top];
-    // top--;
-    // return poppedElement;
 
     return stack[top--];
 }
-int Stack::getTop() const
+int StackArray::getTop() const
 {
     if (isEmpty())
     {
@@ -67,6 +62,20 @@ int Stack::getTop() const
     return stack[top];
 
 }
-void Stack::destroy(){
+void StackArray::destroy(){
     top = -1;
+}
+
+void StackArray :: traverse()const   //Traverse the stack
+{
+    if (isEmpty())
+    {
+        throw underflow_error("Stack is empty!");
+    }
+
+    for (int i = 0; i <= top; i++)
+    {
+        cout << stack[i] << " ";
+    }
+    cout << endl;
 }

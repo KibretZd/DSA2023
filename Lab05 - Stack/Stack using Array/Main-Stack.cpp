@@ -7,16 +7,19 @@ using namespace std;
 #include "stack-array.h"
 
 int main(){
-    Stack s;
+    StackArray s;
     s.push(21);
     s.push(35);
-    cout<<s.getTop()<<endl; //35
-    cout<<s.pop()<<endl;//35
-    cout<<s.getTop()<<endl;//21
-    cout<<s.isEmpty()<<endl; //False
-    cout<<s.isFull()<<endl; //false
-    
-    cout<<s.pop()<<endl; //21
-    cout<<s.isEmpty()<<endl;//true
+    cout<<"The topmost element is: "<<s.getTop()<<endl;     // 35
+    cout<<"The popped element is: "<<s.pop() <<endl;        // 35
+    cout<<"The topmost element is: "<<s.getTop()<<endl;     //21
+    cout<<"Is stack is empty? : "<<s.isEmpty()<<endl;    //False
+    cout<<"Is stack is full? : "<<s.isFull()<<endl;     //False
+    s.push(27);
+    s.push(12);
+    cout<<"The popped element is: "<<s.pop() <<endl;       // 12
+    cout<<"The popped element is: "<<s.pop() <<endl;
+    cout<<"The popped element is: "<<s.pop() <<endl;
+    cout<<"Is stack is empty? : "<< s.isEmpty()<<endl;    //true
     return 0;
 }
